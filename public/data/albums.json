@@ -1,0 +1,202 @@
+[
+    {
+        "title": "how i'm feeling now",
+        "artist": "Charli XCX",
+        "image": "https://upload.wikimedia.org/wikipedia/en/b/bd/Charli_XCX_-_How_I%27m_Feeling_Now.png"
+    },
+    {
+        "title": "THE ALBUM",
+        "artist": "BLACKPINK",
+        "image": "https://upload.wikimedia.org/wikipedia/en/f/f2/BLACKPINK-_The_Album.png"
+    },
+    {
+        "title": "2093",
+        "artist": "Yeat",
+        "image": "https://upload.wikimedia.org/wikipedia/en/9/97/Yeat_-_2093.png"
+    },
+    {
+        "title": "PARTYNEXTDOOR TWO",
+        "artist": "PartyNextDoor",
+        "image": "https://upload.wikimedia.org/wikipedia/en/d/de/PartyNextDoorTwoCover.png"
+    },
+    {
+        "title": "Love Deluxe",
+        "artist": "Sade",
+        "image": "https://upload.wikimedia.org/wikipedia/en/e/e9/Sade_-_Love_Deluxe.png"
+    },
+    {
+        "title": "Currents",
+        "artist": "Tame Impala",
+        "image": "https://upload.wikimedia.org/wikipedia/en/9/9b/Tame_Impala_-_Currents.png"
+    },
+    {
+        "title": "So Close To What",
+        "artist": "Tate McRae",
+        "image": "https://upload.wikimedia.org/wikipedia/en/0/0d/Tate_McRae_-_So_Close_to_What.png"
+    },
+    {
+        "title": "Ultraviolence (Deluxe)",
+        "artist": "Lana Del Rey",
+        "image": "https://upload.wikimedia.org/wikipedia/en/6/6a/UltraviolenceLDR.png"
+    },
+    {
+        "title": "Astroworld",
+        "artist": "Travis Scott",
+        "image": "https://upload.wikimedia.org/wikipedia/en/4/4b/Travis_Scott_-_Astroworld.png"
+    },
+    {
+        "title": "1989 (Taylor's Version)[Deluxe)",
+        "artist": "Taylor Swift",
+        "image": "https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png"
+    },
+    {
+        "title": "Thank Me Later",
+        "artist": "Drake",
+        "image": "https://upload.wikimedia.org/wikipedia/en/9/9c/Drake_-_Thank_Me_Later_cover.jpg"
+    },
+    {
+        "title": "WE STILL DON'T TRUST YOU",
+        "artist": "Future, Metro Boomin",
+        "image": "https://upload.wikimedia.org/wikipedia/en/6/6b/We_Still_Don%27t_Trust_You.png"
+    },
+    {
+        "title": "Brat",
+        "artist": "Charli XCX",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/6/60/Charli_XCX_-_Brat_%28album_cover%29.png"
+    },
+    {
+        "title": "Take Care (Deluxe)",
+        "artist": "Drake",
+        "image": "https://upload.wikimedia.org/wikipedia/en/a/ae/Drake_-_Take_Care_cover.jpg"
+    },
+    {
+        "title": "I Put A Spell On You",
+        "artist": "Nina Simone",
+        "image": "https://upload.wikimedia.org/wikipedia/en/6/67/Nina_Simone_-_I_Put_a_Spell_on_You.png"
+    },
+    {
+        "title": "UTOPIA",
+        "artist": "Travis Scott",
+        "image": "https://upload.wikimedia.org/wikipedia/en/2/23/Travis_Scott_-_Utopia.png"
+    },
+    {
+        "title": "My Beautiful Dark Twisted Fantasy",
+        "artist": "Kanye West",
+        "image": "data:image/jpeg;base64,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"
+    },
+    {
+        "title": "Demon Days",
+        "artist": "Gorillaz",
+        "image": "https://upload.wikimedia.org/wikipedia/en/d/df/Gorillaz_Demon_Days.PNG"
+    },
+    {
+        "title": "PARTYNEXTDOOR",
+        "artist": "PARTYNEXTDOOR",
+        "image": "https://upload.wikimedia.org/wikipedia/en/9/9c/Partynextdooralbum.jpg"
+    },
+    {
+        "title": "CHROMAKOPIA",
+        "artist": "Tyler, the Creator",
+        "image": "https://upload.wikimedia.org/wikipedia/en/5/5b/Chromakopia_CD_cover.jpg"
+    },
+    {
+        "title": "Harry's House",
+        "artist": "Harry Styles",
+        "image": "https://upload.wikimedia.org/wikipedia/en/d/d5/Harry_Styles_-_Harry%27s_House.png"
+    },
+    {
+        "title": "Rodeo",
+        "artist": "Travis Scott",
+        "image": "https://upload.wikimedia.org/wikipedia/en/1/15/Travis_Scott_-_Rodeo.png"
+    },
+    {
+        "title": "Favourite Worst Nightmare",
+        "artist": "Arctic Monkeys",
+        "image": "https://upload.wikimedia.org/wikipedia/en/a/ae/Favourite_Worst_Nightmare.jpg"
+    },
+    {
+        "title": "Honestly, Nevermind",
+        "artist": "Drake",
+        "image": "https://upload.wikimedia.org/wikipedia/en/c/c7/Honestly%2C_Nevermind_-_Drake.png"
+    },
+    {
+        "title": "DeBÍ TiRAR MáS FOToS",
+        "artist": "Bad Bunny",
+        "image": "https://upload.wikimedia.org/wikipedia/en/e/ef/Bad_Bunny_-_Deb%C3%AD_Tirar_M%C3%A1s_Fotos.png"
+    },
+    {
+        "title": "After Hours",
+        "artist": "The Weekend",
+        "image": "https://upload.wikimedia.org/wikipedia/en/c/c1/The_Weeknd_-_After_Hours.png"
+    },
+    {
+        "title": "Blonde",
+        "artist": "Frank Ocean",
+        "image": "https://upload.wikimedia.org/wikipedia/en/a/a0/Blonde_-_Frank_Ocean.jpeg"
+    },
+    {
+        "title": "The Secret of Us",
+        "artist": "Gracie Abrams",
+        "image": "https://upload.wikimedia.org/wikipedia/en/1/18/Gracie_Abrams_-_The_Secret_of_Us.png"
+    },
+    {
+        "title": "Parachutes",
+        "artist": "Coldplay",
+        "image": "https://upload.wikimedia.org/wikipedia/en/f/fd/Coldplay_-_Parachutes.png"
+    },
+    {
+        "title": "Born Sinner(Deluxe Version)",
+        "artist": "J. Cole",
+        "image": "https://upload.wikimedia.org/wikipedia/en/f/fa/J_Cole_Born_Sinner3.jpg"
+    },
+    {
+        "title": "Burning Blue",
+        "artist": "Mariah the Scientist",
+        "image": "https://upload.wikimedia.org/wikipedia/en/e/ef/Mariah_the_Scientist_-_Burning_Blue.png"
+    },
+    {
+        "title": "Her Loss",
+        "artist": "Drake, 21 Savage",
+        "image": "https://upload.wikimedia.org/wikipedia/en/3/3a/Drake_and_21_Savage_-_Her_Loss.png"
+    },
+    {
+        "title": "TAKE TIME",
+        "artist": "Giveon",
+        "image": "https://upload.wikimedia.org/wikipedia/en/3/3c/Giveon_-_Take_Time.png"
+    },
+    {
+        "title": "Beauty Behind The Madness",
+        "artist": "The Weekend",
+        "image": "https://upload.wikimedia.org/wikipedia/en/b/bd/The_Weeknd_-_Beauty_Behind_the_Madness.png"
+    },
+    {
+        "title": "good kid, m.A.A.d city",
+        "artist": "Kendrick Lamar",
+        "image": "https://upload.wikimedia.org/wikipedia/en/9/93/KendrickGKMC.jpg"
+    },
+    {
+        "title": "Mind Of Mine(Deluxe Edition)",
+        "artist": "ZAYN",
+        "image": "https://upload.wikimedia.org/wikipedia/en/a/a5/Zayn_-_Mind_of_Mine_%28Official_Album_Cover%29.png"
+    },
+    {
+        "title": "Melodrama",
+        "artist": "Lorde",
+        "image": "https://upload.wikimedia.org/wikipedia/en/b/b2/Lorde_-_Melodrama.png"
+    },
+    {
+        "title": "Comfort In Chaos",
+        "artist": "John Summit",
+        "image": "https://t2.genius.com/unsafe/600x600/https%3A%2F%2Fimages.genius.com%2Fa339bdc7ebe9cd6d996913e19be3a120.1000x1000x1.png"
+    },
+    {
+        "title": "Sail Out",
+        "artist": "Jhené Aiko",
+        "image": "https://upload.wikimedia.org/wikipedia/en/2/2d/Sail_Out_by_Jhen%C3%A9_Aiko.png"
+    },
+    {
+        "title": "Pink Tape",
+        "artist": "Lil Uzi Vert",
+        "image": "https://upload.wikimedia.org/wikipedia/en/2/2c/Lil_Uzi_Vert_-_Pink_Tape.png"
+    }
+]
