@@ -250,9 +250,10 @@ function Sidebar({ isVisible, pathname, displayText, showNowPlaying, nowPlaying,
 
   return (
     <aside
-      className={`${isVisible ? 'w-full' : 'w-[30%]'} bg-[var(--background)] outline outline-1 outline-primary flex flex-col relative transition-all duration-300 ease-in-out`}
+      className={`${isVisible ? 'w-full' : 'w-[30%]'} bg-[var(--background)] outline outline-1 outline-primary flex flex-col relative overflow-hidden transition-all duration-300 ease-in-out`}
       style={{ flexShrink: 0, width: isVisible ? '100%' : isMobile ? '100%' : '30%', height: '100dvh' }}
     >
+      <HomeFluidBackground />
       <div className="flex flex-col items-center justify-center h-[50vh] min-h-[300px] relative">
         <div className="w-full flex flex-col items-center">
           <button
@@ -548,5 +549,210 @@ function NoTracksDisplay() {
         <div className="text-xs text-[var(--primary)] font-light">[No recent tracks found]</div>
       </div>
     </div>
+  );
+}
+
+function HomeFluidBackground() {
+  const canvasRef = useRef(null);
+  const randomInRange = (min, max) => min + Math.random() * (max - min);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const context = canvas.getContext('2d');
+    if (!context) return;
+
+    const fields = [];
+    const splats = [];
+    const fieldCount = 6;
+    const pointer = { x: null, y: null, active: false };
+    let lastSplatTime = 0;
+    let animationId;
+
+    const resize = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const width = window.innerWidth;
+      const height = canvas.clientHeight;
+      canvas.style.width = `${width}px`;
+      canvas.style.left = '0px';
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      context.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      if (fields.length === 0) {
+        for (let i = 0; i < fieldCount; i += 1) {
+          fields.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            vx: (Math.random() - 0.5) * 0.04,
+            vy: (Math.random() - 0.5) * 0.04,
+            r: Math.min(width, height) * (0.23 + Math.random() * 0.1),
+            phase: Math.random() * Math.PI * 2,
+            speed: 0.0018 + Math.random() * 0.0025,
+          });
+        }
+      }
+    };
+
+    const createSplat = (x, y, vx = 0, vy = 0, force = 1) => {
+      const width = canvas.clientWidth;
+      const height = canvas.clientHeight;
+      splats.push({
+        x: Math.max(0, Math.min(width, x)),
+        y: Math.max(0, Math.min(height, y)),
+        vx,
+        vy,
+        size: Math.min(width, height) * (0.06 + Math.random() * 0.05) * (0.8 + force * 0.4),
+        life: 1,
+        decay: 0.004 + Math.random() * 0.002,
+        seed: Math.random() * Math.PI * 2,
+      });
+      if (splats.length > 34) {
+        splats.splice(0, splats.length - 34);
+      }
+    };
+
+    const onPointerMove = (event) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      const now = performance.now();
+      const vx = pointer.x == null ? 0 : (x - pointer.x) * 0.08;
+      const vy = pointer.y == null ? 0 : (y - pointer.y) * 0.08;
+      pointer.x = x;
+      pointer.y = y;
+      pointer.active = true;
+
+      if (now - lastSplatTime > 55) {
+        const velocity = Math.hypot(vx, vy);
+        const force = Math.max(0.4, Math.min(1.6, velocity / 1.4));
+        createSplat(x, y, vx, vy, force);
+        lastSplatTime = now;
+      }
+    };
+
+    const onPointerLeave = () => {
+      pointer.x = null;
+      pointer.y = null;
+      pointer.active = false;
+    };
+
+    const buildInkPath = (cx, cy, radius, wobble, roughness = 1) => {
+      const points = 20;
+      context.beginPath();
+      for (let i = 0; i <= points; i += 1) {
+        const t = i / points;
+        const angle = t * Math.PI * 2;
+        const noise =
+          0.68 +
+          0.2 * Math.sin(angle * (2.5 + roughness) + wobble * 1.1) +
+          0.12 * Math.sin(angle * (4.5 + roughness) - wobble * 0.8) +
+          0.08 * Math.cos(angle * (6.5 + roughness) + wobble * 0.4);
+        const r = radius * noise;
+        const x = cx + Math.cos(angle) * r;
+        const y = cy + Math.sin(angle) * r;
+        if (i === 0) {
+          context.moveTo(x, y);
+        } else {
+          context.lineTo(x, y);
+        }
+      }
+      context.closePath();
+    };
+
+    const drawField = (field, width, height) => {
+      field.phase += field.speed;
+      const driftX = Math.cos(field.phase * 1.2) * field.r * 0.03;
+      const driftY = Math.sin(field.phase * 0.9) * field.r * 0.025;
+      const cx = field.x + driftX;
+      const cy = field.y + driftY;
+
+      context.fillStyle = 'rgba(8, 8, 8, 0.045)';
+      buildInkPath(cx, cy, field.r, field.phase, 0.8);
+      context.fill();
+
+      context.fillStyle = 'rgba(8, 8, 8, 0.028)';
+      buildInkPath(cx + field.r * 0.09, cy - field.r * 0.05, field.r * 0.86, field.phase + 0.8, 1.2);
+      context.fill();
+
+      field.x += field.vx;
+      field.y += field.vy;
+      if (field.x < -field.r) field.x = width + field.r;
+      if (field.x > width + field.r) field.x = -field.r;
+      if (field.y < -field.r) field.y = height + field.r;
+      if (field.y > height + field.r) field.y = -field.r;
+    };
+
+    const drawSplat = (splat) => {
+      splat.seed += 0.01;
+      splat.x += splat.vx;
+      splat.y += splat.vy;
+      splat.vx *= 0.985;
+      splat.vy *= 0.985;
+      splat.life -= splat.decay;
+
+      if (splat.life <= 0) return false;
+
+      const alpha = splat.life * 0.045;
+      context.fillStyle = `rgba(8, 8, 8, ${alpha * 0.9})`;
+      buildInkPath(splat.x, splat.y, splat.size * (1.08 - splat.life * 0.12), splat.seed, 1.8);
+      context.fill();
+
+      context.fillStyle = `rgba(8, 8, 8, ${alpha * 0.55})`;
+      buildInkPath(splat.x + splat.size * 0.05, splat.y - splat.size * 0.04, splat.size * 0.8, splat.seed + 1.4, 2.3);
+      context.fill();
+
+      return true;
+    };
+
+    const render = () => {
+      const width = canvas.clientWidth;
+      const height = canvas.clientHeight;
+      context.globalCompositeOperation = 'source-over';
+      context.fillStyle = 'rgba(30, 30, 30, 0.11)';
+      context.fillRect(0, 0, width, height);
+      context.globalCompositeOperation = 'source-over';
+
+      fields.forEach((field) => drawField(field, width, height));
+      for (let i = splats.length - 1; i >= 0; i -= 1) {
+        if (!drawSplat(splats[i])) {
+          splats.splice(i, 1);
+        }
+      }
+      animationId = window.requestAnimationFrame(render);
+    };
+
+    resize();
+    // Seed a few stationary splats so the effect appears immediately.
+    for (let i = 0; i < 4; i += 1) {
+      createSplat(
+        canvas.clientWidth * randomInRange(0.2, 0.8),
+        canvas.clientHeight * randomInRange(0.2, 0.8),
+        0,
+        0,
+        1
+      );
+    }
+    render();
+
+    window.addEventListener('resize', resize);
+    window.addEventListener('mousemove', onPointerMove);
+    window.addEventListener('mouseleave', onPointerLeave);
+
+    return () => {
+      window.cancelAnimationFrame(animationId);
+      window.removeEventListener('resize', resize);
+      window.removeEventListener('mousemove', onPointerMove);
+      window.removeEventListener('mouseleave', onPointerLeave);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      aria-hidden="true"
+      className="absolute top-0 left-0 h-full pointer-events-none opacity-18"
+      style={{ filter: 'blur(18px)' }}
+    />
   );
 }
