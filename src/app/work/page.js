@@ -8,6 +8,7 @@ import Website from './projects/Website';
 import GreenShift from './projects/GreenShift';
 import FinSight from './projects/FinSight';
 import Aasha from './projects/Aasha';
+import Chromaticity from './projects/Chromaticity';
 
 const DEFAULT_TECH_ICON = 'https://unpkg.com/lucide-static@latest/icons/code-2.svg';
 const TECH_ICON_MAP = {
@@ -23,6 +24,8 @@ const TECH_ICON_MAP = {
   FastAPI: 'https://cdn.simpleicons.org/fastapi',
   Claude: '/images/tech_icons/claude.svg',
   Gemini: 'https://cdn.simpleicons.org/googlegemini',
+  TensorFlow: 'https://cdn.simpleicons.org/tensorflow',
+  'Three.js': '/images/tech_icons/threejs.png',
   RAG: '/images/tech_icons/rag.png',
 };
 
@@ -42,6 +45,22 @@ const projects = [
     },
     {
       id: 2,
+      title: "Chromaticity (DandyHacks 2025 2nd Place)",
+      titleWithIcon: "Chromaticity (DandyHacks 2025 {STAR} 2nd Place)",
+      titleGlowText: "2nd Place",
+      titleClassName: "text-2xl leading-8 whitespace-nowrap",
+      subtitle: "A real-time computer vision fitness game where movement controls gameplay.",
+      image: "/images/projects/chromaticity/chromaticity-home.png",
+      description:
+        "Built at DandyHacks 2025, Chromaticity explores how motion + AI can drive interactive gameplay, and our team won 2nd place for the project.",
+      expandedContent: <Chromaticity />,
+      link: "https://devpost.com/software/chromaticity-zh8tyc",
+      linkText: "Demo (beta)",
+      githubLink: "https://github.com/nguyenj1863/Chromaticity",
+      techStack: ['Next.js', 'TypeScript', 'TensorFlow', 'Three.js', 'Gemini'],
+    },
+    {
+      id: 3,
       title: "FinSight",
       subtitle: "A production‑ready app to help investors visualise performance across $1M+ in simulated assets.",
       image: "/images/projects/finsight.png",
@@ -51,7 +70,7 @@ const projects = [
       techStack: ['React', 'JavaScript', 'SQL', 'Python'],
     },
     {
-      id: 3,
+      id: 4,
       title: "GreenShift (Hack the 6ix 2025)",
       subtitle: "An AI-powered interactive map that determines the risk of gentrification on Toronto Neighbourhoods.",
       image: "/images/projects/greenshift.png",
@@ -63,7 +82,7 @@ const projects = [
       techStack: ['Python', 'Flask', 'React', 'Gemini'],
     },
     {
-        id: 4,
+        id: 5,
         title: "Personal Website",
         subtitle: "What you're looking at right now! :)",
         image: "/images/projects/website.png",
@@ -74,7 +93,7 @@ const projects = [
     },
   ]
   
-const ProjectTitle = ({ children, rotateRight = false, isHovered = false }) => (
+const ProjectTitle = ({ children, rotateRight = false, isHovered = false, titleClassName = '' }) => (
   <div className="relative inline-block overflow-visible">
     <svg
       width="180"
@@ -100,11 +119,11 @@ const ProjectTitle = ({ children, rotateRight = false, isHovered = false }) => (
     </svg>
 
     {/* Title Text */}
-    <h2 className="relative text-3xl font-body font-bold tracking-tighter leading-8 text-[var(--primary)]">
+    <h2 className={`relative text-3xl font-body font-bold tracking-tighter leading-8 text-[var(--primary)] ${titleClassName}`}>
       
       {/* Stroke Layer */}
       <span
-        className="absolute top-0 left-0 -z-10 text-3xl font-body font-bold tracking-tighter leading-8"
+        className={`absolute top-0 left-0 -z-10 text-3xl font-body font-bold tracking-tighter leading-8 ${titleClassName}`}
         style={{
           WebkitTextStroke: '2px var(--secondary)',
           textStroke: '2px var(--secondary)',
@@ -120,6 +139,67 @@ const ProjectTitle = ({ children, rotateRight = false, isHovered = false }) => (
     </h2>
   </div>
 );
+
+function renderTitleWithGlow(title, glowText) {
+  if (!glowText || typeof title !== 'string') return title;
+  const index = title.indexOf(glowText);
+  if (index === -1) return title;
+
+  return (
+    <>
+      {title.slice(0, index)}
+      <span className="neon-glow">{glowText}</span>
+      {title.slice(index + glowText.length)}
+    </>
+  );
+}
+
+function InlineStar({ className = '', size = 14 }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 20 20"
+      className={className}
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        d="M10 2L12 8L18 10L12 12L10 18L8 12L2 10L8 8L10 2Z"
+        fill="transparent"
+        stroke="var(--primary)"
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M10 2L12 8L18 10L12 12L10 18L8 12L2 10L8 8L10 2Z"
+        fill="var(--primary)"
+        stroke="transparent"
+      />
+    </svg>
+  );
+}
+
+function renderTitleWithGlowAndStar(project) {
+  const raw = project?.titleWithIcon || project?.title;
+  if (typeof raw !== 'string') return raw;
+
+  if (!raw.includes('{STAR}')) {
+    return renderTitleWithGlow(raw, project?.titleGlowText);
+  }
+
+  const parts = raw.split('{STAR}');
+  return (
+    <>
+      {renderTitleWithGlow(parts[0], project?.titleGlowText)}
+      <span className="inline-flex items-center px-1 align-middle">
+        <InlineStar className="neon-glow" size={10} />
+      </span>
+      {renderTitleWithGlow(parts.slice(1).join('{STAR}'), project?.titleGlowText)}
+    </>
+  );
+}
+
 const ProjectCard = ({ project, index, isMobile, openProjectModal }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -149,8 +229,12 @@ const ProjectCard = ({ project, index, isMobile, openProjectModal }) => {
           </div>
 
           <div className="md:w-2/3">
-            <ProjectTitle rotateRight={index % 2 === 0} isHovered={isHovered}>
-              {project.title}
+            <ProjectTitle
+              rotateRight={index % 2 === 0}
+              isHovered={isHovered}
+              titleClassName={project.titleClassName}
+            >
+              {renderTitleWithGlowAndStar(project)}
             </ProjectTitle>
             <h3 className="text-lg font-body text-primary mb-6 mt-1 leading-tight neon-glow">
               {project.subtitle}
@@ -318,7 +402,7 @@ export default function WorkPage() {
                 >
                   <div className="sticky top-0 z-10 flex items-center justify-between p-5 pb-3 bg-[var(--background)] border-b border-primary">
                     <h3 className="text-2xl font-body font-bold tracking-tighter neon-glow text-[var(--primary)]">
-                      {selectedProject.title}
+                      {renderTitleWithGlowAndStar(selectedProject)}
                     </h3>
                     <button
                       type="button"
