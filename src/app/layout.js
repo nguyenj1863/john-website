@@ -604,7 +604,7 @@ function HomeFluidBackground() {
         vy,
         size: Math.min(width, height) * (0.06 + Math.random() * 0.05) * (0.8 + force * 0.4),
         life: 1,
-        decay: 0.004 + Math.random() * 0.002,
+        decay: 0.0018 + Math.random() * 0.0012,
         seed: Math.random() * Math.PI * 2,
       });
       if (splats.length > 34) {
@@ -709,7 +709,7 @@ function HomeFluidBackground() {
       const width = canvas.clientWidth;
       const height = canvas.clientHeight;
       context.globalCompositeOperation = 'source-over';
-      context.fillStyle = 'rgba(30, 30, 30, 0.11)';
+      context.fillStyle = 'rgba(30, 30, 30, 0.045)';
       context.fillRect(0, 0, width, height);
       context.globalCompositeOperation = 'source-over';
 

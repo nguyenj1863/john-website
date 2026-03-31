@@ -136,9 +136,10 @@ export default function Aasha() {
           This was one of my favorite hackathon builds because it forced the product + technical design to revolve
           around real constraints. I was especially excited to use RAG for the first time and see how much better the
           triage flow became when retrieval was grounded in real clinical guidance. For me, GenAI Genesis was mostly
-          about learning how to use GenAI to solve real-world problems in a meaningful way. Designing for SMS and low
-          connectivity made every workflow choice matter, from how information is collected to how clinicians see and
-          act on risk.
+          about learning how to use GenAI to solve real-world problems in a meaningful way. I also really connected to
+          this project personally, since I grew up in a rural area in Vietnam and saw this as a plausible solution to
+          this kind of healthcare access crisis. Designing for SMS and low connectivity made every workflow choice
+          matter, from how information is collected to how clinicians see and act on risk.
         </p>
       </div>
     </div>

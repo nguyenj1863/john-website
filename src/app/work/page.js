@@ -36,7 +36,7 @@ const projects = [
         subtitle: "An SMS-based maternal health triage system with a real-time dashboard.",
         image: "/images/projects/aasha/aasha-home.png",
         description:
-          "Built at GenAI Genesis 2026, Aasha explores how GenAI can solve real-world healthcare challenges by monitoring high-risk pregnancies via structured SMS check-ins and prioritizing follow-ups with a live dashboard and protocol-grounded clinical reasoning.",
+          "Built at GenAI Genesis 2026, Aasha is designed to tackle the challenge of pregnant moms in rural areas communicating with doctors without reliable Wi-Fi or smartphones, using structured SMS check-ins, a clinical-data-trained RAG pipeline that also incorporates patient history/context, and a live dashboard for doctors to track patients and prioritize risk-based follow-up.",
         expandedContent: <Aasha />,
         link: "https://devpost.com/software/aasha-ez5c4u",
         linkText: "Demo (beta)",
