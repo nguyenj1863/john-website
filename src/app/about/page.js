@@ -4,12 +4,73 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
 const SKILL_GROUPS = [
-  { category: 'Programming Languages', items: ['Python', 'C', 'Java', 'JavaScript'] },
-  { category: 'Web Development', items: ['HTML/CSS', 'React', 'Next.js', 'Node.js', 'Tailwind CSS', 'Flask'] },
-  { category: 'Data Science & Machine Learning', items: ['SQLAlchemy', 'Pandas', 'OpenAI', 'Gemini'] },
-  { category: 'Cloud & Database', items: ['SQL'] },
-  { category: 'Desktop & Systems', items: ['Windows', 'Linux'] }
+  { category: 'Languages', items: ['C/C++', 'Python', 'Java', 'TypeScript/JavaScript', 'SQL'] },
+  {
+    category: 'Software Engineering',
+    items: [
+      'Data Structures & Algorithms',
+      'Object-Oriented Programming',
+      'Systems Programming',
+      'REST APIs',
+      'MVC Architecture',
+      'Unit Testing'
+    ]
+  },
+  { category: 'Web Development', items: ['React', 'Next.js', 'Redux', 'Tailwind CSS', 'Flask', 'FastAPI', 'Three.js'] },
+  {
+    category: 'Data Science / Machine Learning',
+    items: ['Pandas', 'PyTorch', 'TensorFlow.js', 'Retrieval-Augmented Generation (RAG)', 'LangChain', 'Convolutional Neural Networks']
+  },
+  {
+    category: 'Databases & Tools',
+    items: ['PostgreSQL', 'Firebase', 'Supabase', 'Git', 'Linux', 'Docker', 'CI/CD', 'CUnit', 'pytest']
+  }
 ];
+
+const DEFAULT_ICON = 'https://unpkg.com/lucide-static@latest/icons/code-2.svg';
+const SOFTWARE_ENGINEERING_ICON_SKILLS = new Set([
+  'Data Structures & Algorithms',
+  'Object-Oriented Programming',
+  'Systems Programming',
+  'REST APIs',
+  'MVC Architecture',
+  'Unit Testing'
+]);
+const SKILL_ICON_MAP = {
+  'C/C++': 'https://cdn.simpleicons.org/cplusplus',
+  Python: 'https://cdn.simpleicons.org/python',
+  Java: '/images/tech_icons/java.png',
+  'TypeScript/JavaScript': 'https://cdn.simpleicons.org/typescript',
+  SQL: '/images/tech_icons/sql.png',
+  'Data Structures & Algorithms': 'https://unpkg.com/lucide-static@latest/icons/blocks.svg',
+  'Object-Oriented Programming': 'https://unpkg.com/lucide-static@latest/icons/boxes.svg',
+  'Systems Programming': 'https://unpkg.com/lucide-static@latest/icons/cpu.svg',
+  'REST APIs': 'https://unpkg.com/lucide-static@latest/icons/webhook.svg',
+  'MVC Architecture': 'https://unpkg.com/lucide-static@latest/icons/layers.svg',
+  'Unit Testing': 'https://unpkg.com/lucide-static@latest/icons/test-tube.svg',
+  React: 'https://cdn.simpleicons.org/react',
+  'Next.js': '/images/tech_icons/nextjs.png',
+  Redux: 'https://cdn.simpleicons.org/redux',
+  'Tailwind CSS': 'https://cdn.simpleicons.org/tailwindcss',
+  Flask: '/images/tech_icons/flask.png',
+  FastAPI: 'https://cdn.simpleicons.org/fastapi',
+  'Three.js': '/images/tech_icons/threejs.png',
+  Pandas: '/images/tech_icons/pandas.png',
+  PyTorch: 'https://cdn.simpleicons.org/pytorch',
+  'TensorFlow.js': 'https://cdn.simpleicons.org/tensorflow',
+  'Retrieval-Augmented Generation (RAG)': '/images/tech_icons/rag.png',
+  LangChain: '/images/tech_icons/langchain.png',
+  'Convolutional Neural Networks': '/images/tech_icons/cnn.png',
+  PostgreSQL: 'https://cdn.simpleicons.org/postgresql',
+  Firebase: '/images/tech_icons/firebase.png',
+  Supabase: 'https://cdn.simpleicons.org/supabase',
+  Git: '/images/tech_icons/git.svg',
+  Linux: '/images/tech_icons/linux.png',
+  Docker: 'https://cdn.simpleicons.org/docker',
+  'CI/CD': 'https://cdn.simpleicons.org/githubactions',
+  CUnit: 'https://unpkg.com/lucide-static@latest/icons/check-check.svg',
+  pytest: 'https://cdn.simpleicons.org/pytest'
+};
 
 const SectionHeading = ({ children, ellipseRotation = -5 }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -161,7 +222,7 @@ export default function About() {
         </div>
         <div className="p-6 bg-[var(--background)] transition-all mt-10">
             <SectionHeading ellipseRotation={-5}>Technical Skills</SectionHeading>
-            <p className="mb-4 font-body font-light text-lg">In no particular order, here's a mix of some languages, libraries, frameworks, and tools that I have experience working with.</p>
+            <p className="mb-4 font-body font-light text-lg">These are the technical skills listed on my resume.</p>
         </div>
         <div className="p-6 bg-[var(--background)] transition-all">
             {SKILL_GROUPS.map((group, index) => (
@@ -183,16 +244,18 @@ export default function About() {
 }
 
 const SkillBadge = ({ skillName }) => {
-  const iconPath = `/images/tech_icons/${skillName.toLowerCase()
-    .replace('.', '')
-    .replace('/', '-')
-    .replace('#', 'sharp')
-    .replace(' ', '')}.png`;
+  const iconPath = SKILL_ICON_MAP[skillName] ?? DEFAULT_ICON;
+  const shouldInvertIcon = SOFTWARE_ENGINEERING_ICON_SKILLS.has(skillName);
 
   return (
       <div className="relative z-10 transition-all bg-var(--background) p-2 pr-4 flex items-center whitespace-nowrap border border-[var(--primary)] md:hover:-translate-y-0.5 md:hover:-translate-x-0.5 rounded-full">
         <div className="w-6 h-6 mr-2 flex items-center justify-center">
-          <img src={iconPath} alt={skillName} className="w-5 h-5 object-contain" />
+          <img
+            src={iconPath}
+            alt={skillName}
+            className="w-5 h-5 object-contain"
+            style={shouldInvertIcon ? { filter: 'invert(1)' } : undefined}
+          />
         </div>
         <span className="font-body font-medium text-[var(--primary)] text-base neon-glow">{skillName}</span>
       </div>
