@@ -6,15 +6,15 @@ export default function GreenShift() {
             <div className="mb-6">
                 <SectionHeading>The Project</SectionHeading>
                 <p className="font-body font-light">
-                    FinSight is a tool to help identify which neighborhoods are at risk of unsustainable gentrification; so that policymakers, developers, and communities can make smarter, more just decisions.
+                    GreenShift is a tool that helps identify neighborhoods at risk of unsustainable gentrification, so policymakers, developers, and communities can make more informed and equitable decisions.
                 </p>
             </div>
             <div className="mb-6">
                 <SectionHeading>Technical Overview</SectionHeading>
                 <ul className="list-disc pl-5 font-body font-light dark:[&>li]:marker:text-darkSecondary">
                     <li>Gemini for calculating the risk of gentrification</li>
-                    <li>Flask for the back-end</li>
-                    <li>Reach for designing the website</li>
+                    <li>Flask for the backend</li>
+                    <li>React for building the web interface</li>
                 </ul>
             </div>
             <div className="mb-6">
