@@ -667,11 +667,11 @@ function HomeFluidBackground() {
       const cx = field.x + driftX;
       const cy = field.y + driftY;
 
-      context.fillStyle = 'rgba(8, 8, 8, 0.045)';
+      context.fillStyle = 'rgba(90, 90, 90, 0.02)';
       buildInkPath(cx, cy, field.r, field.phase, 0.8);
       context.fill();
 
-      context.fillStyle = 'rgba(8, 8, 8, 0.028)';
+      context.fillStyle = 'rgba(90, 90, 90, 0.012)';
       buildInkPath(cx + field.r * 0.09, cy - field.r * 0.05, field.r * 0.86, field.phase + 0.8, 1.2);
       context.fill();
 
@@ -694,11 +694,11 @@ function HomeFluidBackground() {
       if (splat.life <= 0) return false;
 
       const alpha = splat.life * 0.045;
-      context.fillStyle = `rgba(8, 8, 8, ${alpha * 0.9})`;
+      context.fillStyle = `rgba(90, 90, 90, ${alpha * 0.55})`;
       buildInkPath(splat.x, splat.y, splat.size * (1.08 - splat.life * 0.12), splat.seed, 1.8);
       context.fill();
 
-      context.fillStyle = `rgba(8, 8, 8, ${alpha * 0.55})`;
+      context.fillStyle = `rgba(90, 90, 90, ${alpha * 0.35})`;
       buildInkPath(splat.x + splat.size * 0.05, splat.y - splat.size * 0.04, splat.size * 0.8, splat.seed + 1.4, 2.3);
       context.fill();
 
@@ -709,9 +709,9 @@ function HomeFluidBackground() {
       const width = canvas.clientWidth;
       const height = canvas.clientHeight;
       context.globalCompositeOperation = 'source-over';
-      context.fillStyle = 'rgba(30, 30, 30, 0.045)';
+      context.fillStyle = 'rgba(20, 20, 20, 0.11)';
       context.fillRect(0, 0, width, height);
-      context.globalCompositeOperation = 'source-over';
+      context.globalCompositeOperation = 'screen';
 
       fields.forEach((field) => drawField(field, width, height));
       for (let i = splats.length - 1; i >= 0; i -= 1) {
@@ -751,8 +751,8 @@ function HomeFluidBackground() {
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className="absolute top-0 left-0 h-full pointer-events-none opacity-18"
-      style={{ filter: 'blur(18px)' }}
+      className="absolute top-0 left-0 h-full pointer-events-none opacity-12"
+      style={{ filter: 'blur(18px)', backgroundColor: 'rgba(0, 0, 0, 0.23)' }}
     />
   );
 }
